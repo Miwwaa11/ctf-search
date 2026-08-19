@@ -84,70 +84,72 @@ export default function EventCard({ event, isIndonesian }) {
 
   return (
     <div
-      className={`group relative overflow-hidden rounded-2xl border p-6 transition-all duration-200 hover:border-neutral-600 ${
+      className={`group relative rounded-xl border p-5 transition-colors duration-150 ${
         event.status === 'running'
           ? 'border-white/20 bg-white/[0.03] running-glow'
-          : 'border-neutral-800 bg-neutral-950'
+          : 'border-neutral-800/80 bg-neutral-950 hover:border-neutral-700'
       }`}
     >
-      {/* Header: status + format + weight */}
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center gap-2.5">
-          <span className={`inline-flex items-center gap-1.5 rounded-lg border px-3 py-1 text-xs font-semibold ${config.badgeClass}`}>
+      {/* Top row */}
+      <div className="flex items-center justify-between gap-3 mb-4">
+        <div className="flex items-center gap-2">
+          <span className={`inline-flex items-center gap-1.5 rounded-md border px-2.5 py-[3px] text-[11px] font-medium ${config.badgeClass}`}>
             {event.status === 'running' && (
               <span className={`h-1.5 w-1.5 rounded-full ${config.dotClass} animate-pulse`} />
             )}
-            <StatusIcon className="h-3.5 w-3.5" />
+            <StatusIcon className="h-3 w-3" />
             {isIndonesian
               ? (config.label === 'Running' ? 'Berjalan' : config.label === 'Upcoming' ? 'Akan Datang' : 'Selesai')
               : config.label}
           </span>
-          <span className="inline-flex items-center gap-1.5 rounded-lg border border-neutral-800 bg-black px-3 py-1 text-xs text-neutral-500">
-            {event.format === 'Attack-Defense' ? <Swords className="h-3.5 w-3.5" /> : <Trophy className="h-3.5 w-3.5" />}
+          <span className="inline-flex items-center gap-1 rounded-md border border-neutral-800 bg-black px-2.5 py-[3px] text-[11px] text-neutral-500">
+            {event.format === 'Attack-Defense' ? <Swords className="h-3 w-3" /> : <Trophy className="h-3 w-3" />}
             {event.formatDescription}
           </span>
         </div>
-        <div className="flex items-center gap-1.5">
-          <Star className={`h-3.5 w-3.5 ${getWeightColor(event.weight)}`} />
-          <span className={`text-sm font-bold font-mono ${getWeightColor(event.weight)}`}>
+        <div className="flex items-center gap-1 shrink-0">
+          <Star className={`h-3 w-3 ${getWeightColor(event.weight)}`} />
+          <span className={`text-xs font-bold font-mono ${getWeightColor(event.weight)}`}>
             {formatWeight(event.weight)}
           </span>
         </div>
       </div>
 
       {/* Title */}
-      <h3 className="text-lg font-bold text-white leading-snug mb-4 group-hover:text-neutral-200 transition-colors">
+      <h3 className="text-[15px] font-semibold text-white leading-snug mb-4 group-hover:text-neutral-200 transition-colors">
         {event.name}
       </h3>
 
-      {/* Time block */}
-      <div className="rounded-xl border border-neutral-800 bg-black p-4 mb-4">
-        <div className="flex items-center gap-2.5 mb-3">
-          <Clock className="h-4 w-4 text-neutral-500" />
-          <span className="text-sm font-medium text-neutral-400">{dayName}</span>
-          <span className="text-neutral-700">|</span>
-          <Timer className="h-3.5 w-3.5 text-neutral-600" />
-          <span className="text-xs text-neutral-500">{formatDuration(event.durationHours)}</span>
+      {/* Time */}
+      <div className="rounded-lg bg-black/60 border border-neutral-800/60 p-4 mb-4">
+        <div className="flex items-center gap-2 mb-2.5">
+          <Clock className="h-3.5 w-3.5 text-neutral-500" />
+          <span className="text-xs font-medium text-neutral-400">{dayName}</span>
+          <span className="text-neutral-800">|</span>
+          <Timer className="h-3 w-3 text-neutral-600" />
+          <span className="text-[11px] text-neutral-500">{formatDuration(event.durationHours)}</span>
         </div>
-        <div className="flex items-center gap-8 text-sm">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-1">
           <div>
-            <span className="text-neutral-600 block text-[11px] mb-1">Mulai</span>
-            <span className="text-neutral-200 font-mono font-medium">{startDate} {startTime}</span>
+            <span className="text-[10px] text-neutral-600 uppercase tracking-wider">Mulai</span>
+            <p className="text-sm text-neutral-200 font-mono mt-0.5">{startDate} {startTime}</p>
           </div>
           <div>
-            <span className="text-neutral-600 block text-[11px] mb-1">Selesai</span>
-            <span className="text-neutral-200 font-mono font-medium">
+            <span className="text-[10px] text-neutral-600 uppercase tracking-wider">Selesai</span>
+            <p className="text-sm text-neutral-200 font-mono mt-0.5">
               {sameDay ? endTime : `${endDate} ${endTime}`}
-            </span>
+            </p>
           </div>
         </div>
+
+        {/* Running progress */}
         {event.status === 'running' && (
           <div className="mt-3 pt-3 border-t border-neutral-800/60">
-            <div className="flex items-center justify-between mb-1.5">
-              <span className="text-xs text-neutral-500">Sisa waktu {getTimeUntil(event.endTime)}</span>
-              <span className="text-xs font-mono font-bold text-white">{event.progress.toFixed(0)}%</span>
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-[11px] text-neutral-500">{getTimeUntil(event.endTime)} tersisa</span>
+              <span className="text-[11px] font-mono font-semibold text-white">{event.progress.toFixed(0)}%</span>
             </div>
-            <div className="h-1.5 w-full rounded-full bg-neutral-800">
+            <div className="h-1.5 w-full rounded-full bg-neutral-800 overflow-hidden">
               <div
                 className="h-full rounded-full bg-white transition-all duration-1000"
                 style={{ width: `${event.progress}%` }}
@@ -155,49 +157,51 @@ export default function EventCard({ event, isIndonesian }) {
             </div>
           </div>
         )}
+
+        {/* Upcoming countdown */}
         {event.status === 'upcoming' && (
           <div className="mt-3 pt-3 border-t border-neutral-800/60">
-            <span className="text-xs text-neutral-500">{getTimeUntil(event.startTime)}</span>
+            <span className="text-[11px] text-neutral-500">Mulai {getTimeUntil(event.startTime)}</span>
           </div>
         )}
       </div>
 
-      {/* Meta row */}
+      {/* Meta */}
       <div className="flex flex-wrap items-center gap-2 mb-4">
         {event.location && (
-          <span className="inline-flex items-center gap-1.5 rounded-lg border border-neutral-800 bg-black px-3 py-1 text-xs text-neutral-500">
-            <MapPin className="h-3.5 w-3.5" />
+          <span className="inline-flex items-center gap-1.5 rounded-md bg-neutral-900 px-2.5 py-1 text-[11px] text-neutral-500">
+            <MapPin className="h-3 w-3" />
             {event.location}
           </span>
         )}
         {event.participants > 0 && (
-          <span className="inline-flex items-center gap-1.5 rounded-lg border border-neutral-800 bg-black px-3 py-1 text-xs text-neutral-500">
-            <Users className="h-3.5 w-3.5" />
-            {event.participants} peserta
+          <span className="inline-flex items-center gap-1.5 rounded-md bg-neutral-900 px-2.5 py-1 text-[11px] text-neutral-500">
+            <Users className="h-3 w-3" />
+            {event.participants}
           </span>
         )}
-        <span className="inline-flex items-center rounded-lg border border-neutral-800 bg-black px-3 py-1 text-xs text-neutral-600">
+        <span className="rounded-md bg-neutral-900 px-2.5 py-1 text-[11px] text-neutral-600">
           {event.organizer}
         </span>
       </div>
 
       {/* Description */}
       {event.description && (
-        <p className="text-xs text-neutral-600 line-clamp-2 leading-relaxed mb-5">
+        <p className="text-xs text-neutral-600 leading-relaxed mb-5 line-clamp-2">
           {event.description.replace(/<[^>]*>/g, '').substring(0, 150)}
         </p>
       )}
 
       {/* Links */}
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-2.5 pt-1">
         {event.ctftimeUrl && (
           <a
             href={event.ctftimeUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-xl border border-neutral-700 bg-neutral-900 px-4 py-2 text-xs font-medium text-neutral-300 transition-all hover:bg-white hover:text-black hover:border-white"
+            className="inline-flex items-center gap-1.5 rounded-lg bg-white px-3.5 py-1.5 text-[11px] font-medium text-black transition-colors hover:bg-neutral-200"
           >
-            <ExternalLink className="h-3.5 w-3.5" />
+            <ExternalLink className="h-3 w-3" />
             CTftime
           </a>
         )}
@@ -206,9 +210,9 @@ export default function EventCard({ event, isIndonesian }) {
             href={event.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-xl border border-neutral-800 bg-black px-4 py-2 text-xs font-medium text-neutral-500 transition-all hover:bg-neutral-800 hover:text-neutral-200 hover:border-neutral-600"
+            className="inline-flex items-center gap-1.5 rounded-lg border border-neutral-800 px-3.5 py-1.5 text-[11px] font-medium text-neutral-400 transition-colors hover:text-white hover:border-neutral-600"
           >
-            <Link2 className="h-3.5 w-3.5" />
+            <Link2 className="h-3 w-3" />
             Website
           </a>
         )}

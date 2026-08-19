@@ -19,36 +19,38 @@ export default function FilterBar({
   const hasFilters = searchQuery || statusFilter !== 'All' || formatFilter !== 'All'
 
   return (
-    <div className="mb-8 space-y-4">
-      <div className="relative">
-        <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-neutral-600" />
+    <div className="mb-8">
+      {/* Search */}
+      <div className="relative mb-3">
+        <Search className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-neutral-600" />
         <input
           type="text"
           placeholder="Cari nama CTF, organizer, lokasi..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full rounded-xl border border-neutral-800 bg-neutral-950 py-3 pl-12 pr-12 text-sm text-white placeholder-neutral-600 outline-none transition-all focus:border-neutral-600 focus:ring-1 focus:ring-neutral-700"
+          className="w-full rounded-lg border border-neutral-800 bg-black py-2.5 pl-10 pr-10 text-sm text-white placeholder-neutral-600 outline-none transition-colors focus:border-neutral-600"
         />
         {searchQuery && (
           <button
             onClick={() => setSearchQuery('')}
-            className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-600 hover:text-white"
+            className="absolute right-3.5 top-1/2 -translate-y-1/2 text-neutral-600 hover:text-white"
           >
             <X className="h-4 w-4" />
           </button>
         )}
       </div>
 
-      <div className="flex flex-wrap items-center gap-3">
-        <div className="flex items-center gap-2 text-xs text-neutral-600">
-          <SlidersHorizontal className="h-4 w-4" />
+      {/* Filters */}
+      <div className="flex flex-wrap items-center gap-2">
+        <div className="flex items-center gap-1.5 text-xs text-neutral-600 mr-1">
+          <SlidersHorizontal className="h-3.5 w-3.5" />
           <span>Filter</span>
         </div>
 
         <select
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
-          className="rounded-xl border border-neutral-800 bg-neutral-950 px-4 py-2 text-xs text-neutral-300 outline-none transition-all focus:border-neutral-600 hover:border-neutral-700"
+          className="rounded-lg border border-neutral-800 bg-black px-3 py-1.5 text-xs text-neutral-400 outline-none transition-colors focus:border-neutral-600 hover:border-neutral-700"
         >
           {statusOptions.map(opt => (
             <option key={opt} value={opt}>{opt === 'All' ? 'Semua Status' : opt}</option>
@@ -58,7 +60,7 @@ export default function FilterBar({
         <select
           value={formatFilter}
           onChange={(e) => setFormatFilter(e.target.value)}
-          className="rounded-xl border border-neutral-800 bg-neutral-950 px-4 py-2 text-xs text-neutral-300 outline-none transition-all focus:border-neutral-600 hover:border-neutral-700"
+          className="rounded-lg border border-neutral-800 bg-black px-3 py-1.5 text-xs text-neutral-400 outline-none transition-colors focus:border-neutral-600 hover:border-neutral-700"
         >
           {formatOptions.map(opt => (
             <option key={opt} value={opt}>{opt === 'All' ? 'Semua Format' : opt}</option>
@@ -68,7 +70,7 @@ export default function FilterBar({
         <select
           value={sortBy}
           onChange={(e) => setSortBy(e.target.value)}
-          className="rounded-xl border border-neutral-800 bg-neutral-950 px-4 py-2 text-xs text-neutral-300 outline-none transition-all focus:border-neutral-600 hover:border-neutral-700"
+          className="rounded-lg border border-neutral-800 bg-black px-3 py-1.5 text-xs text-neutral-400 outline-none transition-colors focus:border-neutral-600 hover:border-neutral-700"
         >
           {sortOptions.map(opt => (
             <option key={opt.value} value={opt.value}>{opt.label}</option>
@@ -78,16 +80,16 @@ export default function FilterBar({
         {hasFilters && (
           <button
             onClick={() => { setSearchQuery(''); setStatusFilter('All'); setFormatFilter('All') }}
-            className="inline-flex items-center gap-1.5 rounded-xl border border-neutral-700 bg-neutral-900 px-3 py-2 text-xs font-medium text-neutral-300 transition-all hover:bg-neutral-800 hover:text-white"
+            className="inline-flex items-center gap-1 rounded-lg border border-neutral-800 px-2.5 py-1.5 text-xs font-medium text-neutral-400 transition-colors hover:text-white hover:border-neutral-600"
           >
-            <X className="h-3.5 w-3.5" />
+            <X className="h-3 w-3" />
             Reset
           </button>
         )}
 
-        <div className="ml-auto text-xs text-neutral-600">
+        <span className="ml-auto text-[11px] text-neutral-600 tabular-nums">
           {filteredCount} / {totalCount} event
-        </div>
+        </span>
       </div>
     </div>
   )

@@ -12,24 +12,24 @@ export default function StatsBar({ events }) {
   ]
 
   return (
-    <div className="mb-8 grid grid-cols-3 gap-4">
+    <div className="mb-8 grid grid-cols-3 gap-3">
       {stats.map((stat) => {
         const Icon = stat.icon
         return (
           <div
             key={stat.label}
-            className={`flex items-center gap-4 rounded-xl border p-4 ${
+            className={`flex items-center gap-3 rounded-lg border p-4 ${
               stat.active
                 ? 'border-white/20 bg-white/5'
-                : 'border-neutral-800 bg-neutral-950'
+                : 'border-neutral-800/60 bg-neutral-950'
             }`}
           >
-            <Icon className={`h-5 w-5 shrink-0 ${stat.active ? 'text-white' : 'text-neutral-600'}`} />
-            <div>
-              <div className={`text-2xl font-bold font-mono ${stat.active ? 'text-white' : 'text-neutral-400'}`}>
+            <Icon className={`h-4 w-4 shrink-0 ${stat.active ? 'text-white' : 'text-neutral-700'}`} />
+            <div className="leading-none">
+              <div className={`text-xl font-bold font-mono tabular-nums ${stat.active ? 'text-white' : 'text-neutral-500'}`}>
                 {stat.count}
               </div>
-              <div className="text-[11px] text-neutral-600 leading-tight mt-0.5">
+              <div className="text-[10px] text-neutral-600 mt-1 uppercase tracking-wider">
                 {stat.label}
               </div>
             </div>

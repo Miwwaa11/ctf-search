@@ -59,8 +59,8 @@ export default function EventsPage({ events, loading, error, lastUpdated: _lastU
   return (
     <div>
       <div className="mb-8">
-        <h2 className="text-2xl font-bold text-white mb-2">Internasional CTF Events</h2>
-        <p className="text-sm text-neutral-500">
+        <h2 className="text-xl font-bold text-white">Internasional CTF Events</h2>
+        <p className="text-sm text-neutral-600 mt-1">
           Event CTF dari seluruh dunia
         </p>
       </div>
@@ -79,12 +79,12 @@ export default function EventsPage({ events, loading, error, lastUpdated: _lastU
       {filteredEvents.length === 0 ? (
         <EmptyState message="Tidak ada event yang sesuai filter" />
       ) : (
-        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {filteredEvents.map((event, index) => (
             <div
               key={event.id}
               className="animate-slide-in"
-              style={{ animationDelay: `${Math.min(index * 40, 400)}ms` }}
+              style={{ animationDelay: `${Math.min(index * 30, 300)}ms` }}
             >
               <EventCard event={event} isIndonesian={false} />
             </div>

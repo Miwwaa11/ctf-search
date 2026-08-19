@@ -8,14 +8,14 @@ function App() {
   const { events, loading, error, lastUpdated, refetch } = useCTFEvents()
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-black text-white">
       <Header
         lastUpdated={lastUpdated}
         onRefresh={refetch}
         loading={loading}
       />
 
-      <main className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10 py-10">
+      <main className="mx-auto max-w-[1200px] px-6 lg:px-8 py-10">
         <Routes>
           <Route
             path="/"
@@ -44,10 +44,10 @@ function App() {
         </Routes>
       </main>
 
-      <footer className="border-t border-neutral-800 py-8 mt-16">
-        <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10 flex items-center justify-between text-xs text-neutral-600">
-          <span>CTF Event Tracker</span>
-          <span>Data from CTftime.org</span>
+      <footer className="border-t border-neutral-900 py-8 mt-16">
+        <div className="mx-auto max-w-[1200px] px-6 lg:px-8 flex items-center justify-between text-[11px] text-neutral-700">
+          <span>CTF Tracker</span>
+          <span>CTftime.org</span>
         </div>
       </footer>
     </div>

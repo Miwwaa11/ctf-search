@@ -60,23 +60,23 @@ export default function IndonesiaPage({ events, loading, error, lastUpdated: _la
   return (
     <div>
       <div className="mb-8">
-        <div className="flex items-center gap-4 mb-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white">
-            <Flag className="h-5 w-5 text-black" />
+        <div className="flex items-center gap-3">
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-neutral-900 border border-neutral-800">
+            <Flag className="h-4 w-4 text-neutral-400" />
           </div>
           <div>
-            <h2 className="text-2xl font-bold text-white mb-1">CTF Indonesia</h2>
-            <p className="text-sm text-neutral-500">
+            <h2 className="text-xl font-bold text-white">CTF Indonesia</h2>
+            <p className="text-sm text-neutral-600 mt-0.5">
               Event CTF nasional Indonesia
             </p>
           </div>
         </div>
 
         {indonesianEvents.length === 0 && !loading && (
-          <div className="mt-5 flex items-start gap-3 rounded-xl border border-neutral-800 bg-neutral-950 p-5">
-            <Info className="h-5 w-5 text-neutral-500 mt-0.5 shrink-0" />
-            <div className="text-sm leading-relaxed">
-              <p className="font-medium text-neutral-400 mb-2">Deteksi Event Indonesia</p>
+          <div className="mt-5 flex items-start gap-3 rounded-lg border border-neutral-800/60 bg-neutral-950 p-4">
+            <Info className="h-4 w-4 text-neutral-600 mt-0.5 shrink-0" />
+            <div className="text-xs leading-relaxed">
+              <p className="font-medium text-neutral-400 mb-1">Deteksi Event Indonesia</p>
               <p className="text-neutral-600">
                 Event Indonesia dideteksi berdasarkan keyword seperti nama kota, universitas, dan organisasi Indonesia.
                 Beberapa event mungkin tidak terdeteksi jika tidak menggunakan keyword tersebut.
@@ -106,12 +106,12 @@ export default function IndonesiaPage({ events, loading, error, lastUpdated: _la
           }
         />
       ) : (
-        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {filteredEvents.map((event, index) => (
             <div
               key={event.id}
               className="animate-slide-in"
-              style={{ animationDelay: `${Math.min(index * 40, 400)}ms` }}
+              style={{ animationDelay: `${Math.min(index * 30, 300)}ms` }}
             >
               <EventCard event={event} isIndonesian={true} />
             </div>
